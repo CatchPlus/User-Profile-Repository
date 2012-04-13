@@ -1,0 +1,124 @@
+<assembly xmlns="http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+
+	<id>sdk</id>
+
+	<formats>
+		<format>tar.gz</format>
+	</formats>
+
+	<baseDirectory>upr-${project.version}</baseDirectory>
+
+	<moduleSets>
+		<moduleSet>
+			<useAllReactorProjects>true</useAllReactorProjects>
+			<includes>
+				<include>nl.gridline.upr:upr-api</include>
+				<include>nl.gridline.upr:upr-backend</include>
+				<include>nl.gridline.upr:upr-data</include>
+			</includes>
+			<binaries>
+				<unpack>false</unpack>
+				<outputDirectory>lib</outputDirectory>
+			</binaries>
+		</moduleSet>
+	</moduleSets>
+
+	<!-- include all libs that are set as compile time -->
+	<dependencySets>
+		<dependencySet>
+			<scope>compile</scope>
+			<includes>
+				<include>*:jar</include>
+			</includes>
+			<outputDirectory>lib</outputDirectory>
+		</dependencySet>
+	</dependencySets>
+
+	<fileSets>
+		<fileSet>
+			<directory>${project.basedir}</directory>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>README*</include>
+				<include>LICENSE*</include>
+				<include>NOTICE*</include>
+			</includes>
+		</fileSet>
+
+		<fileSet>
+			<directory>${project.basedir}/src/main/dist/licenses</directory>
+			<outputDirectory>/licenses</outputDirectory>
+			<includes>
+				<include>*.*</include>
+			</includes>
+		</fileSet>
+
+		<fileSet>
+			<directory>${project.basedir}/src/main/dist/etc</directory>
+			<outputDirectory>/etc</outputDirectory>
+			<includes>
+				<include>*.xml</include>
+				<include>favicon.ico</include>
+				<include>README.txt</include>
+			</includes>
+			<filtered>true</filtered>
+		</fileSet>
+
+		<!-- the webapps need to be copied as well -->
+		<fileSet>
+			<directory>${project.basedir}/src/main/dist/webapps</directory>
+			<outputDirectory>/webapps</outputDirectory>
+			<includes>
+				<include>**/*</include>
+			</includes>
+		</fileSet>
+		<!-- some extra information on the lib's -->
+		<fileSet>
+			<directory>${project.basedir}/src/main/dist/lib</directory>
+			<outputDirectory>/lib</outputDirectory>
+			<includes>
+				<include>README.txt</include>
+			</includes>
+		</fileSet>
+
+
+	</fileSets>
+	<files>
+		<file>
+			<source>${project.basedir}/src/main/dist/bin/README.txt</source>
+			<outputDirectory>bin</outputDirectory>
+		</file>
+		<file>
+			<source>${project.basedir}/src/main/dist/bin/upr.sh</source>
+			<outputDirectory>bin</outputDirectory>
+			<fileMode>755</fileMode>
+			<lineEnding>unix</lineEnding>
+			<filtered>true</filtered>
+		</file>
+		<file>
+			<source>${project.basedir}/src/main/dist/bin/upr-server.sh</source>
+			<outputDirectory>bin</outputDirectory>
+			<fileMode>755</fileMode>
+			<lineEnding>unix</lineEnding>
+			<filtered>true</filtered>
+		</file>
+		<file>
+			<source>${project.basedir}/src/main/dist/bin/upr.cfg</source>
+			<outputDirectory>bin</outputDirectory>
+			<lineEnding>unix</lineEnding>
+			<filtered>false</filtered>
+		</file>
+		<file>
+			<source>${project.basedir}/src/main/dist/state/README.txt</source>
+			<outputDirectory>state</outputDirectory>
+			<filtered>true</filtered>
+			<lineEnding>unix</lineEnding>
+		</file>
+		<file>
+			<source>${project.basedir}/src/main/dist/log/README.txt</source>
+			<outputDirectory>log</outputDirectory>
+			<filtered>true</filtered>
+			<lineEnding>unix</lineEnding>
+		</file>
+	</files>
+</assembly>

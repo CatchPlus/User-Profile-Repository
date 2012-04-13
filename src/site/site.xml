@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="UPR">
+	<bannerLeft>
+		<name>UPR</name>
+		<src>http://gridline.nl/images/logo.png</src>
+		<href>http://www.gridline.nl</href>
+	</bannerLeft>
+	
+	<bannerRight>
+		<src>http://gridline.nl/images/logo.png</src>
+	</bannerRight>
+	
+	<body>
+		<menu name="UPR">
+			<item name="Introduction" href="index.html" />
+			<item name="Getting Started" href="getting-started.html" />
+		</menu>
+
+		<links>
+			<item name="Mahout" href="http://mahout.apache.org/" />
+			<item name="Hadoop" href="http://hadoop.apache.org/" />
+			<item name="HBase" href="http://hbase.apache.org/" />
+		</links>
+
+		<menu ref="reports" />
+
+	</body>
+</project>

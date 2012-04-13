@@ -1,0 +1,23 @@
+<configuration debug="false">
+	<!-- standard out appender: -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<Pattern>%date [%thread] %-5level %logger{45}:%line - %msg%n
+			</Pattern>
+			<!-- <Pattern>%h %l %u %user %date "%r" %s %b</Pattern> -->
+		</encoder>
+	</appender>
+
+	<logger name="httpclient.wire.header" level="INFO" />
+	<logger name="org.apache.commons.httpclient.HttpMethodBase"
+		level="INFO" />
+	<logger name="httpclient.wire.content" level="INFO" />
+	<logger name="org.apache.commons.httpclient.HttpConnection" level="INFO" />
+
+	<root level="DEBUG">
+		<appender-ref ref="STDOUT" />
+		<!-- <appender-ref ref="RootSiftAppender" /> -->
+	</root>
+
+</configuration>
+

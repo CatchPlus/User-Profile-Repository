@@ -1,0 +1,13 @@
+ ------
+GridLine - UPR - Introduction
+------
+\xA9 GridLine: Job Tiel Groenestege
+------
+2012-02-07
+
+Introduction
+
+	UPR is User Profile Repository, It stores data about users combined with the Rails front-end it is a generic 
+	user account system it allows other services to connect and use the basics user information an log-in framework.
+	
+	One of the more importent users of the UPR is ZieOok 

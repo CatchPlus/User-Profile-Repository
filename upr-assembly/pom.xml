@@ -1,0 +1,86 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>upr-parent</artifactId>
+		<groupId>nl.gridline.upr</groupId>
+		<version>0.2.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>upr-assembly</artifactId>
+	<packaging>pom</packaging>
+	<name>UPR assembly</name>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2.1</version>
+				<configuration>
+					<finalName>upr-${project.version}</finalName>
+					<descriptors>
+						<descriptor>src/main/assembly/sdk.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>distro-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>src/main/assembly/sdk.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>license-maven-plugin</artifactId> 
+				<version>1.0-beta-1</version> <configuration> <licensesOutputDirectory>src/main/dist/licenses 
+				</licensesOutputDirectory> </configuration> <executions> <execution> <id>download-licenses</id> 
+				<goals> <goal>download-licenses</goal> </goals> </execution> </executions> 
+				</plugin> -->
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>nl.gridline.upr</groupId>
+			<artifactId>upr-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>nl.gridline.upr</groupId>
+			<artifactId>upr-data</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>nl.gridline.upr</groupId>
+			<artifactId>upr-backend</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>nl.gridline.zieook</groupId>
+			<artifactId>embedder-jetty</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>nl.gridline.upr</groupId>
+			<artifactId>upr-client</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+		</dependency>
+	</dependencies>
+</project>

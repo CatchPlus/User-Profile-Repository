@@ -1,0 +1,139 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>upr-parent</artifactId>
+		<groupId>nl.gridline.upr</groupId>
+		<version>0.2.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>upr-backend</artifactId>
+	<name>UPR backend</name>
+	<dependencies>
+		<dependency>
+			<groupId>nl.gridline.upr</groupId>
+			<artifactId>upr-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>nl.gridline.zieook.backend</groupId>
+			<artifactId>zieook-commons</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>nl.gridline.upr</groupId>
+			<artifactId>upr-data</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>nl.gridline.zieook</groupId>
+			<artifactId>embedder-jetty</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jettison</groupId>
+			<artifactId>jettison</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<!-- copies the webapp folder directly to the distribution module: -->
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4.3</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<!-- here the phase you need -->
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>../upr-assembly/src/main/dist/webapps/upr</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/main/webapp</directory>
+									<!-- <filtering>true</filtering> -->
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<!-- this needs a an update to: http://wiki.eclipse.org/Jetty/Feature/Jetty_Maven_Plugin -->
+				<!-- -javaagent:/home/dev/openjpa/lib/openjpa.jar com.xyz.Main -->
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.25</version>
+				<configuration>
+					<webAppConfig>
+						<contextPath>/</contextPath>
+						<tempDirectory>${project.build.directory}/work</tempDirectory>
+					</webAppConfig>
+					<systemProperties>
+						<systemProperty>
+							<name>jetty.port</name>
+							<value>20200</value>
+						</systemProperty>
+						<systemProperty>
+							<name>logback.configurationFile</name>
+							<value>${basedir}/logback.xml</value>
+						</systemProperty>
+					</systemProperties>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<stopKey>foo</stopKey>
+					<stopPort>9999</stopPort>
+				</configuration>
+			</plugin>
+		</plugins>
+
+	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.7</version>
+				<reportSets>
+					<reportSet>
+						<id>jaxb</id>
+						<configuration>
+							<doclet>com.lunatech.doclets.jax.jaxb.JAXBDoclet</doclet>
+							<docletArtifacts>
+								<docletArtifact>
+									<groupId>com.lunatech.jax-doclets</groupId>
+									<artifactId>doclets</artifactId>
+									<version>0.9.0</version>
+								</docletArtifact>
+							</docletArtifacts>
+						</configuration>
+						<reports>
+							<report>javadoc</report>
+						</reports>
+					</reportSet>
+					<reportSet>
+						<configuration>
+							<doclet>com.lunatech.doclets.jax.jaxrs.JAXRSDoclet</doclet>
+							<docletArtifacts>
+								<docletArtifact>
+									<groupId>com.lunatech.jax-doclets</groupId>
+									<artifactId>doclets</artifactId>
+									<version>0.9.0</version>
+								</docletArtifact>
+							</docletArtifacts>
+						</configuration>
+						<reports>
+							<report>javadoc</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
+
+</project>

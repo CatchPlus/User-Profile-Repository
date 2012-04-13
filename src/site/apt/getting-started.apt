@@ -1,0 +1,38 @@
+ ------
+GridLine - UPR - Getting Started
+------
+\xA9 GridLine: Job Tiel Groenestege
+------
+2012-02-07
+
+Getting Started
+
+	The installation of the UPR back-end is quite simple, we assume you have a running Hadoop cluster with HBase and ZooKeeper.
+	 
+	* Unpack the tar.gz file at a location of your choice, e.g. <<</opt/upr>>>
+	
+	* Open the <<<bin/upr.cfg>>> and change the <<<UPR_HOME>>> parameter the location of the application.
+	
+	* Open the <<<etc/upr-default.xml>>> check all entries that contain <<<mulisch>>> and change it to the server
+		applicable for your hadoop cluster.
+		
+	* Execute <<<bin/upr-server.sh start>>> check the logs <<<log/upr.log>> 
+	to see the it started all-right. Also check the <<<log/upr.out>>> and <<<log/upr.log>>>
+	sometimes the application 
+	
+	* To stop the application execute <<<bin/upr-server.sh stop>>>
+	
+The application will create two tables in the HBase cluster, when it starts the first time:
+	
+	* UPR_eventlog this tables contains user visits per connected content provider
+	
+	* UPR_persons contains all user data.
+	
+	
+* Tips
+	
+	* Check the logs, often to see if anything is wrong.
+	
+	* When the application is running the command: <<<jps>>> should show this, two times <<<WebAppServer>>>
+	
+	* ... more tips will follow
